@@ -30,7 +30,7 @@ df.dropna(subset=['FullyVaccinated'], inplace=True)
 print(df)
 
 
-# Defining your features (X) and target (y)
+# Defining features (X) and target (y)
 X = df[['Vaccinated', 'AdditionalDosesPer100people', 'AdditionalDosesTotal', 'DosesAdministeredPer100people', 'DosesAdministeredTotal']]
 y = df['FullyVaccinated']
 
@@ -53,7 +53,7 @@ model.fit(X_train, y_train)
 # Predicting on the test data
 y_pred = model.predict(X_test)
 
-# Evaluating your model (you can add more evaluation metrics as needed)
+# Evaluating our model 
 mse = mean_squared_error(y_test, y_pred)
 r2 = r2_score(y_test, y_pred)
 
@@ -74,7 +74,7 @@ def classify_vaccination_rate(rate):
 # Applying the classification function to create the target variable
 df['VaccinationRateCategory'] = df['FullyVaccinated'].apply(classify_vaccination_rate)
 
-# Defining your features (X_classification) and target (y_classification) for classification
+# Defining our features (X_classification) and target (y_classification) for classification
 X_classification = df[['Vaccinated', 'AdditionalDosesPer100people', 'AdditionalDosesTotal', 'DosesAdministeredPer100people', 'DosesAdministeredTotal']]
 y_classification = df['VaccinationRateCategory']
 
@@ -84,7 +84,7 @@ X_train_classification, X_test_classification, y_train_classification, y_test_cl
 # Creating a SimpleImputer with strategy 'mean' for classification
 imputer_classification = SimpleImputer(strategy='mean')
 
-# Fit and transform the imputer on your feature data for classification
+# Fit and transform the imputer on our feature data for classification
 X_train_classification = imputer_classification.fit_transform(X_train_classification)
 X_test_classification = imputer_classification.transform(X_test_classification)
 
@@ -111,16 +111,16 @@ print(confusion_mat)
 import pandas as pd
 import matplotlib.pyplot as plt
 
-# Load your dataset
+# Loading the dataset
 df = pd.read_csv('/Users/esrayanar/Desktop/CovidVaccinations2023.csv')
 
-# Sort the data by vaccination rate in descending order
+# Sorting the data by vaccination rate in descending order
 df.sort_values(by='FullyVaccinated', ascending=False, inplace=True)
 
-# Select the top N countries for visualization
+# Selecting the top N countries for visualization
 top_countries = df.head(10)
 
-# Create a bar chart
+# Creating a bar chart
 plt.figure(figsize=(12, 6))
 plt.barh(top_countries['Country'], top_countries['FullyVaccinated'], color='skyblue')
 plt.xlabel('Fully Vaccinated Percentage (%)')
